@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "calculatrice"
+version = "0.1.0"
+description = "Calculatrice en Python avec Poetry"
+authors = ["David Tacite <david.tacite@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+emoji = "^2.11.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
