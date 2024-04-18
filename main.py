@@ -2,6 +2,7 @@ import emoji
 from dotenv import load_dotenv
 import os
 from  soustraction_division import *
+from getpass import getpass
 
 def get_numbers():
     number_1 = float(input('Entrez le nombre 1: '))
@@ -12,7 +13,7 @@ def start_calculator():
     print(emoji.emojize('🫵  🫵  🫵    CALCULATRICE   🫵  🫵  🫵'))
     load_dotenv()
     historique = []
-    if input('Rentrez votre mot de passe pour utiliser la calculatrice\n') != os.environ['MOT_DE_PASSE']:
+    if getpass('Rentrez votre mot de passe pour utiliser la calculatrice\n') != os.environ['MOT_DE_PASSE']:
         quit()
     print("Menu:")
     print("1. Addition")
