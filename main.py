@@ -1,33 +1,49 @@
 import emoji
 from dotenv import load_dotenv
 import os
+from  soustraction_division import *
+
+def get_numbers():
+    number_1 = float(input('Entrez le nombre 1: '))
+    number_2 = float(input('Entrez le nombre 2: '))
+    return number_1, number_2
 
 print(emoji.emojize('🫵  🫵  🫵    CALCULATRICE   🫵  🫵  🫵'))
 load_dotenv()
 historique = []
 if input('Rentrez votre mot de passe pour utiliser la calculatrice\n') != os.environ['MOT_DE_PASSE']:
     quit()
+print("Menu:")
+print("1. Addition")
+print("2. Soustraction")
+print("3. Multiplication")
+print('4. Division')
 
 while True:
-    print("Menu:")
-    print("1. Opération membre 1")
-    print("2. Opération membre 2")
-    print("3. Opération membre 3")
-    print('4. Opération membre 4')
-    choice = input("Entrez votre choix (1/2/3/4 <exit for exit>) :")
+    choice = input("Entrez votre choix (1 - 2 - 3 - 4 - <exit for exit> - <history for history) :")
     match choice:
         case '1':
-            # Appel de la fonction pour l'opération du membre 1
-            print('operation 1')
+            a, b = get_numbers()
+            result = add_op(a, b)
+            historique.append(f'{a} + {b} = {result}')
+            print(result)
         case '2':
-            # Appel de la fonction pour l'opération du membre 2
-            print('operation 2')
+            a, b = get_numbers()
+            result = sous_op(a, b)
+            historique.append(f'{a} - {b} = {result}')
+            print(result)
         case '3':
-            # Appel de la fonction pour l'opération du membre 3
-            print('operation 3')
+            a, b = get_numbers()
+            result = mul_op(a, b)
+            historique.append(f'{a} * {b} = {result}')
+            print(result)
         case '4':
-            # Appel de la fonction pour l'opération du membre 4
-            print('operation 4')
+            a, b = get_numbers()
+            result = div_op(a, b)
+            historique.append(f'{a} / {b} = {result}')
+            print(result)
+        case 'history':
+            for calcul in historique:
+                print(calcul)
         case 'exit':
-            # Quitter la boucle
             break
