@@ -28,7 +28,7 @@ def start_calculator():
                 a, b = get_numbers()
                 result = add_op(a, b)
                 historique.append(f'{a} + {b} = {result}')
-                print(result)
+                print(f'result : {result}')
             case '2':
                 a, b = get_numbers()
                 result = sous_op(a, b)
