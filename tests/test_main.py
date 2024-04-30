@@ -80,5 +80,5 @@ def test_history(monkeypatch, capsys):
     captured = capsys.readouterr()
     lst = captured.out
     toto = lst.split('\n')[-2]
-    assert '10 + 10 = 20' == toto
+    assert '10.0 + 10.0 = 20.0' == toto
         
