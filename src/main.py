@@ -1,61 +1,48 @@
 import emoji
 from dotenv import load_dotenv
 import os
-from add_op import add_op
-from div_op import div_op
-from mul_op import mul_op
-from sous_op import sous_op
+from src.add_op import add_op
+from src.div_op import div_op
+from src.mul_op import mul_op
+from src.sous_op import sous_op
 from getpass import getpass
 
-def get_numbers():
-    number_1 = float(input('Entrez le nombre 1: '))
-    number_2 = float(input('Entrez le nombre 2: '))
-    return number_1, number_2
-
-def start_calculator():
-    print(emoji.emojize('🫵  🫵  🫵    CALCULATRICE   🫵  🫵  🫵'))
-    load_dotenv()
+class Calculatrice:
     historique = []
-    if getpass('Rentrez votre mot de passe pour utiliser la calculatrice\n') != os.environ['MOT_DE_PASSE']:
-        quit()
-    print("Menu:")
-    print("1. Addition")
-    print("2. Soustraction")
-    print("3. Multiplication")
-    print('4. Division')
+    operations = {'1': add_op, '2': sous_op, '3': mul_op, '4': div_op}
+    operators = {'1': '+', '2': '-', '3':'*', '4':'/'}
+    
+    def __init__(self) -> None:
+        self.historique = []
+    
+    
+    def get_numbers(self):
+        number_1 = float(input('Entrez le nombre 1: '))
+        number_2 = float(input('Entrez le nombre 2: '))
+        return number_1, number_2
 
-    while True:
-        choice = input("Entrez votre choix (1 - 2 - 3 - 4 - <exit for exit> - <history for history) :")
-        match choice:
-            case '1':
-                a, b = get_numbers()
-                result = add_op(a, b)
-                historique.append(f'{a} + {b} = {result}')
-                print(f'result : {result}')
-            case '2':
-                a, b = get_numbers()
-                result = sous_op(a, b)
-                historique.append(f'{a} - {b} = {result}')
-                print(result)
-            case '3':
-                a, b = get_numbers()
-                result = mul_op(a, b)
-                historique.append(f'{a} * {b} = {result}')
-                print(result)
-            case '4':
-                a, b = get_numbers()
-                if b == 0:
-                    print("Erreur division par 0")
-                else:
-                    result = div_op(a, b)
-                    historique.append(f'{a} / {b} = {result}')
-                    print(result)
-                        
-            case 'history':
-                for calcul in historique:
-                    print(calcul)
-            case 'exit':
+    def start_calculator(self):
+        print(emoji.emojize('🫵  🫵  🫵    CALCULATRICE   🫵  🫵  🫵'))
+        load_dotenv()
+#        if getpass('Rentrez votre mot de passe pour utiliser la calculatrice\n') != os.environ['MOT_DE_PASSE']:
+ #           quit()
+        print("Menu:")
+        print("1. Addition")
+        print("2. Soustraction")
+        print("3. Multiplication")
+        print('4. Division')
+
+        while True:
+            choice = input("Entrez votre choix (1 - 2 - 3 - 4 - <exit for exit> - <history for history) :")
+            if choice == 'exit':
                 break
-            
-if __name__ == '__main__':
-    start_calculator()
+            elif choice == "history":
+                for calcul in self.historique:
+                    print(calcul)
+            elif choice in ('1', '2', '3', '4'):
+                a, b = self.get_numbers()
+                result = self.operations[choice](a, b)
+                self.historique.append(f'{a} {self.operators[choice]} {b} = {result}')
+                print(f'resultat : {result}')
+            else:
+                print('Choix invalide')

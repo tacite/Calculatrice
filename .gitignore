@@ -2,3 +2,6 @@
 .env
 poetry.lock
 src/__pycache__/*
+tests/__pycache__/*
+.coverage
+toto.py
