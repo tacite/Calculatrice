@@ -16,6 +16,8 @@ def start_calculator():
     print(emoji.emojize('🫵  🫵  🫵    CALCULATRICE   🫵  🫵  🫵'))
     load_dotenv()
     historique = []
+    operations = {'1': add_op, '2': sous_op, '3': mul_op, '4': div_op}
+    operators = {'1': '+', '2': '-', '3':'*', '4':'/'}
     if getpass('Rentrez votre mot de passe pour utiliser la calculatrice\n') != os.environ['MOT_DE_PASSE']:
         quit()
     print("Menu:")
@@ -26,36 +28,18 @@ def start_calculator():
 
     while True:
         choice = input("Entrez votre choix (1 - 2 - 3 - 4 - <exit for exit> - <history for history) :")
-        match choice:
-            case '1':
-                a, b = get_numbers()
-                result = add_op(a, b)
-                historique.append(f'{a} + {b} = {result}')
-                print(f'result : {result}')
-            case '2':
-                a, b = get_numbers()
-                result = sous_op(a, b)
-                historique.append(f'{a} - {b} = {result}')
-                print(result)
-            case '3':
-                a, b = get_numbers()
-                result = mul_op(a, b)
-                historique.append(f'{a} * {b} = {result}')
-                print(result)
-            case '4':
-                a, b = get_numbers()
-                if b == 0:
-                    print("Erreur division par 0")
-                else:
-                    result = div_op(a, b)
-                    historique.append(f'{a} / {b} = {result}')
-                    print(result)
-                        
-            case 'history':
-                for calcul in historique:
-                    print(calcul)
-            case 'exit':
-                break
-            
+        if choice == 'exit':
+            break
+        elif choice == "history":
+            for calcul in historique:
+                print(calcul)
+        elif choice in ('1', '2', '3', '4'):
+            a, b = get_numbers()
+            result = operations[choice](a, b)
+            historique.append(f'{a} {operators[choice]} {b} = {result}')
+            print(f'resultat : {result}')
+        else:
+            print('Choix invalide')
+
 if __name__ == '__main__':
     start_calculator()
