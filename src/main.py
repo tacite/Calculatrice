@@ -1,7 +1,10 @@
 import emoji
 from dotenv import load_dotenv
 import os
-from  soustraction_division import *
+from add_op import add_op
+from div_op import div_op
+from mul_op import mul_op
+from sous_op import sous_op
 from getpass import getpass
 
 def get_numbers():
