@@ -61,3 +61,24 @@ def test_division_historique(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
     calc.start_calculator()
     assert calc.historique == ['40.0 / 10.0 = 4.0']
+    
+def test_input(monkeypatch, capsys):
+    calc = Calculatrice()
+    inputs = iter(['toto', 'exit'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+    calc.start_calculator()
+    captured = capsys.readouterr()
+    lst = captured.out
+    toto = lst.split('\n')[-2]
+    assert "Choix invalide" == toto
+    
+def test_history(monkeypatch, capsys):
+    calc = Calculatrice()
+    inputs = iter(['1', '10', '10', 'history', 'exit'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+    calc.start_calculator()
+    captured = capsys.readouterr()
+    lst = captured.out
+    toto = lst.split('\n')[-2]
+    assert '10 + 10 = 20' == toto
+        
