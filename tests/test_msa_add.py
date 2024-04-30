@@ -1,4 +1,4 @@
-from Calculatrice.src.add_op import add_op
+from src.add_op import add_op
 import pytest
 
 def test_ok_add_op():

@@ -1,5 +1,5 @@
-from ..src.add_op import add_op
-from ..src.div_op import div_op
+from src.add_op import add_op
+from src.div_op import div_op
 import pytest
 
 def test_ok_div_op():
@@ -9,5 +9,5 @@ def test_ok_div_op():
 
 def test_nok_add_op():
     with pytest.raises(ZeroDivisionError):
-        assert add_op(4,[5])
+        add_op(4,[5])
   
