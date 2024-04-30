@@ -10,6 +10,8 @@ python = "^3.10"
 emoji = "^2.11.0"
 python-dotenv = "^1.0.1"
 pytest = "^8.2.0"
+coverage = "^7.5.0"
+pytest-cov = "^5.0.0"
 
 
 [build-system]
